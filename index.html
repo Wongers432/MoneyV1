@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>TapTrack</title>
+    <link rel="manifest" href="manifest.json">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#0F1014">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="app">
+        <!-- Dashboard View -->
+        <div id="dashboard" class="view active">
+            <header>
+                <div class="header-content">
+                    <h1>Dashboard</h1>
+                    <button id="add-btn-top" class="icon-btn">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                    </button>
+                </div>
+            </header>
+
+            <main>
+                <section class="balance-section">
+                    <div class="card balance-card">
+                        <span class="label">Total Balance</span>
+                        <h2 id="total-balance">£0.00</h2>
+                        <button class="edit-icon">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                        </button>
+                    </div>
+                </section>
+
+                <section class="budget-section">
+                    <div class="ring-container">
+                        <svg class="progress-ring" width="240" height="240">
+                            <circle class="progress-ring__background" stroke="#1A1B22" stroke-width="18" fill="transparent" r="90" cx="120" cy="120"/>
+                            <circle class="progress-ring__bar" stroke="#0057FF" stroke-width="18" stroke-dasharray="565.48" stroke-dashoffset="565.48" stroke-linecap="round" fill="transparent" r="90" cx="120" cy="120"/>
+                        </svg>
+                        <div class="ring-content">
+                            <span id="remaining-amount" class="amount">£0.00</span>
+                            <span class="subtext">left this month</span>
+                            <span class="badge">Monthly</span>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="insight-section">
+                    <div class="card insight-card">
+                        <div class="insight-icon">✨</div>
+                        <p id="smart-insight">Add your first expense to get started!</p>
+                    </div>
+                </section>
+
+                <button id="quick-add-trigger" class="primary-btn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                    Log Expense
+                </button>
+
+                <section class="recent-section">
+                    <h3>Recent Transactions</h3>
+                    <div id="transaction-list" class="transaction-list">
+                        <!-- Transactions will be injected here -->
+                        <div class="empty-state">
+                            <div class="empty-icon">📭</div>
+                            <p>No transactions yet</p>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+
+        <!-- Quick Add Modal -->
+        <div id="quick-add-modal" class="modal">
+            <div class="modal-overlay"></div>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Log Expense</h2>
+                    <button id="close-modal" class="close-btn">✕</button>
+                </div>
+                <div class="modal-body">
+                    <div class="amount-input-container">
+                        <span class="currency">£</span>
+                        <input type="number" id="expense-amount" placeholder="0.00" inputmode="decimal">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Category</label>
+                        <div id="category-selector" class="category-grid">
+                            <!-- Categories will be injected here -->
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Note (Optional)</label>
+                        <input type="text" id="expense-note" placeholder="What was this for?">
+                    </div>
+
+                    <button id="save-expense" class="save-btn">Save Expense</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab Bar -->
+        <nav class="tab-bar">
+            <button class="tab-item active" data-view="dashboard">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+                <span>Dashboard</span>
+            </button>
+            <button class="tab-item" data-view="categories">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+                <span>Categories</span>
+            </button>
+            <button class="tab-item" data-view="settings">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+                <span>Settings</span>
+            </button>
+        </nav>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>

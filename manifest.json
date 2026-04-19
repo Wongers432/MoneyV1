@@ -1,0 +1,24 @@
+{
+    "name": "TapTrack",
+    "short_name": "TapTrack",
+    "start_url": "./index.html",
+    "display": "standalone",
+    "background_color": "#0F1014",
+    "theme_color": "#0F1014",
+    "description": "Premium Expense Tracking",
+    "icons": [
+        {
+            "src": "https://cdn-icons-png.flaticon.com/512/2830/2830284.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ],
+    "shortcuts": [
+        {
+            "name": "Add Expense",
+            "url": "./index.html?add=true",
+            "icons": [{ "src": "https://cdn-icons-png.flaticon.com/512/2830/2830284.png", "sizes": "512x512" }]
+        }
+    ]
+}
